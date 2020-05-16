@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MVVMActivity"></activity>
         <activity android:name=".activity.MVCActivity" />
         <activity android:name=".activity.RootActivity">
             <intent-filter>
@@ -19,6 +18,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.MainActivity" />
+        <!-- 请根据您当前自定义的 PushService 名称路径进行配置-->
+        <service
+            android:name="com.getui.demo.service.DemoPushService"
+            android:exported="true"
+            android:label="PushService"
+            android:process=":pushservice"/>
+
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

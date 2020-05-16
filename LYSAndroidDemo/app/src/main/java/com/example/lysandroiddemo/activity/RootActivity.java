@@ -10,7 +10,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.lysandroiddemo.BuildConfig;
 import com.example.lysandroiddemo.R;
+import com.igexin.sdk.IUserLoggerInterface;
+import com.igexin.sdk.PushManager;
 
 public class RootActivity extends AppCompatActivity {
 
@@ -21,6 +24,8 @@ public class RootActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_root);
+
+        initGeTuiSDK();
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(RootActivity.this, android.R.layout.simple_list_item_1, data);
         ListView listView = findViewById(R.id.listView);
@@ -42,5 +47,20 @@ public class RootActivity extends AppCompatActivity {
 //                Toast.makeText(RootActivity.this, data[position], Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    void initGeTuiSDK() {
+        Log.d("initGeTuiSDK", "initializing sdk...");
+        PushManager.getInstance().initialize(this);
+        if (BuildConfig.DEBUG) {
+            //切勿在 release 版本上开启调试日志
+            PushManager.getInstance().setDebugLogger(this, new IUserLoggerInterface() {
+
+                @Override
+                public void log(String s) {
+                    Log.i("PUSH_LOG", s);
+                }
+            });
+        }
     }
 }

@@ -16,6 +16,17 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        manifestPlaceholders = [
+                //个推应用参数，请填写您申请的 GETUI_APP_ID，GETUI_APP_KEY，GETUI_APP_SECRET 值
+                GETUI_APP_ID : "tPZFUqWR5292XYG85sltM1",
+                GETUI_APP_KEY : "kR9kBA7FtvA1fw9gnnsIL6",
+                GETUI_APP_SECRET : "x9DbGrNaDZ83WLdPXE79M8",
+        ]
+        ndk {
+            // 注意：这里需要添加项目所需 CPU 类型的最小集
+            abiFilters "armeabi", "armeabi-v7a", "x86_64", "x86"
+        }
     }
 
     buildTypes {
@@ -41,5 +52,7 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.6.0")
     implementation 'com.alibaba:fastjson:1.1.71.android'
     implementation 'com.google.code.gson:gson:2.8.6'
+
+    implementation 'com.getui:sdk:2.14.0.0'  //请将此处的 ${version} 替换成您当前相应的 SDK 版本号，如 2.14.0.0
 
 }
